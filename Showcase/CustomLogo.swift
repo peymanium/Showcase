@@ -11,7 +11,9 @@ import UIKit
 class CustomLogo: UIImageView {
 
     override func awakeFromNib() {
-        layer.cornerRadius = 3.0
+        
+        layer.cornerRadius = 5
+        layer.masksToBounds = true
     }
 
 }

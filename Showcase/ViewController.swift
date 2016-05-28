@@ -125,7 +125,6 @@ class ViewController: UIViewController {
     }
     
     
-    
     func ShowAlertView (title : String, message : String)
     {
         let alertView = UIAlertController(title: title, message: message, preferredStyle: .Alert)

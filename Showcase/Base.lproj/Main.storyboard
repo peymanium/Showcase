@@ -77,6 +77,9 @@
                                         <state key="normal" title="Login / Sign up">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="BTN_Login_Tapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ic7-22-TzS"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Sign in / Sign up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niY-BD-zHU">
                                         <rect key="frame" x="8" y="28" width="218" height="21"/>
@@ -154,10 +157,33 @@
                             <constraint firstItem="Tet-OZ-XLw" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="vFY-m6-pUS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="TXT_Email" destination="HpN-BD-798" id="3tf-hE-DMo"/>
+                        <outlet property="TXT_Password" destination="ydt-bb-O3n" id="qeq-sW-WiU"/>
+                        <segue destination="pXZ-eh-ZN6" kind="show" identifier="Segue_LoggedIn" id="1MA-K4-B3r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="245" y="303"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Ojj-xx-18F">
+            <objects>
+                <viewController id="pXZ-eh-ZN6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uwZ-nf-h8c"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hp1-V7-6Qi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fzb-TL-H4u">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u33-KE-4UX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1004" y="303"/>
         </scene>
     </scenes>
     <resources>

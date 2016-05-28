@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -37,6 +38,23 @@ class ViewController: UIViewController {
             {
                 let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 print ("Successfully logged in with Facebook")
+                
+                
+                DataServices.ds.REF_BASE.authWithOAuthProvider("facebook", token: accessToken, withCompletionBlock: { (error : NSError!, authData : FAuthData!) in
+                    
+                    if error == nil
+                    {
+                        print ("Login failed \(error)")
+                    }
+                    else
+                    {
+                        print ("Logged in \(authData)")
+                        
+                        NSUserDefaults.standardUserDefaults().setValue(authData, forKey: KEY_UID)
+                    }
+                    
+                })
+                
             }
             
         }

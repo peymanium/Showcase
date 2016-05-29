@@ -29,6 +29,7 @@
 		5DF945311CF9DF3900CDE86F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF945301CF9DF3900CDE86F /* SystemConfiguration.framework */; };
 		5DF945331CFB539B00CDE86F /* FeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945321CFB539B00CDE86F /* FeedsViewController.swift */; };
 		5DF945351CFB542400CDE86F /* PostCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945341CFB542400CDE86F /* PostCellTableViewCell.swift */; };
+		5DF945371CFB86AA00CDE86F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945361CFB86AA00CDE86F /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		5DF945301CF9DF3900CDE86F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5DF945321CFB539B00CDE86F /* FeedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsViewController.swift; sourceTree = "<group>"; };
 		5DF945341CFB542400CDE86F /* PostCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCellTableViewCell.swift; sourceTree = "<group>"; };
+		5DF945361CFB86AA00CDE86F /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		5D8CE0F31CF7A83900A37868 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				5DF945361CFB86AA00CDE86F /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D8CE1011CF7B36200A37868 /* CustomTextField.swift in Sources */,
+				5DF945371CFB86AA00CDE86F /* Post.swift in Sources */,
 				5D8CE0FD1CF7A90F00A37868 /* Constants.swift in Sources */,
 				5D8CE0FF1CF7B24300A37868 /* CustomLogo.swift in Sources */,
 				5DF945211CF9D7BF00CDE86F /* DataServices.swift in Sources */,

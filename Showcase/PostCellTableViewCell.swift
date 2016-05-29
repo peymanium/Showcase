@@ -11,7 +11,7 @@ import UIKit
 class PostCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var img_profile : UIImageView!
-    
+    @IBOutlet weak var img_post : UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,6 +22,8 @@ class PostCellTableViewCell: UITableViewCell {
         
         self.img_profile.layer.cornerRadius = self.img_profile.frame.width / 2
         self.img_profile.clipsToBounds = true
+        
+        self.img_post.clipsToBounds = true
         
     }
 

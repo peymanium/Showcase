@@ -32,7 +32,14 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        
+        if let cell = tableView.dequeueReusableCellWithIdentifier("CellID") as? PostCellTableViewCell
+        {
+            return cell
+        }
+        else
+        {
+            return UITableViewCell()
+        }
         
     }
     

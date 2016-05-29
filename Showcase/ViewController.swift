@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import Firebase
 
 class ViewController: UIViewController {
-
+    
     
     @IBOutlet weak var TXT_Email: CustomTextField!
     @IBOutlet weak var TXT_Password: CustomTextField!
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         }
     }
     
-
+    
     @IBAction func BTN_Facebook_Tapped(sender: AnyObject)
     {
         let facebookLogin = FBSDKLoginManager()
@@ -58,6 +58,10 @@ class ViewController: UIViewController {
                     else
                     {
                         print ("Logged in \(authData)")
+                        
+                        //Create user in Firebase
+                        let user = ["provider" : authData.provider!]
+                        DataServices.ds.CreateFirebaseUser(authData.uid, user: user)
                         
                         NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
                         
@@ -95,7 +99,16 @@ class ViewController: UIViewController {
                             {
                                 NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
                                 
-                                DataServices.ds.REF_BASE.authUser(email, password: password, withCompletionBlock: nil)
+                                DataServices.ds.REF_BASE.authUser(email, password: password, withCompletionBlock: { (errorAuthUser_ : NSError!, authDate_ : FAuthData!) in
+                                    
+                                    if errorAuthUser_ == nil
+                                    {
+                                        //Create user in Firebase
+                                        let user = ["provider" : authDate_.provider!]
+                                        DataServices.ds.CreateFirebaseUser(authDate_.uid, user: user)
+                                    }
+                                    
+                                })
                                 
                                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                                 
@@ -134,6 +147,5 @@ class ViewController: UIViewController {
         self.presentViewController(alertView, animated: true, completion: nil)
     }
     
-
 }
 

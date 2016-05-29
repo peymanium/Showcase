@@ -12,6 +12,7 @@ class PostCellTableViewCell: UITableViewCell {
 
     @IBOutlet weak var img_profile : UIImageView!
     @IBOutlet weak var img_post : UIImageView!
+    @IBOutlet weak var txt_postDesc : UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,6 +25,9 @@ class PostCellTableViewCell: UITableViewCell {
         self.img_profile.clipsToBounds = true
         
         self.img_post.clipsToBounds = true
+        
+        //just to start the UITextView from the top of the text
+        self.txt_postDesc.contentOffset = CGPointZero
         
     }
 

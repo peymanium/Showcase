@@ -16,7 +16,6 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var posts = [Post]()
     static var imageCache = NSCache() //for caching images in the memory buffer, use static to be a singleton and call from any file in the project
     
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -61,18 +60,13 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let post = self.posts[indexPath.row]
-        
         if let cell = tableView.dequeueReusableCellWithIdentifier("CellID") as? PostCell
         {
-            //Check if image with the key=ImageURL valid in cache, then send it to confirgure cell
-            var image : UIImage!
-            if let imageUrl = post.imageUrl
-            {
-                image = FeedsViewController.imageCache.objectForKey(imageUrl) as? UIImage
-            }
+            cell.firebaseRequest?.cancel() //cancel the Alamofire request if the new row loaded
             
-            cell.ConfigureCell(post, cachedImage: image)
+            let post = self.posts[indexPath.row]
+            
+            cell.ConfigureCell(post)
             return cell
         }
         else

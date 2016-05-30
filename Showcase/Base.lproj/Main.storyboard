@@ -197,7 +197,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nBG-aq-Ta5" customClass="CustomView" customModule="Showcase" customModuleProvider="target">
-                                                    <rect key="frame" x="8" y="8" width="544" height="394.5"/>
+                                                    <rect key="frame" x="8" y="8" width="544" height="395"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HZd-pJ-8dY">
                                                             <rect key="frame" x="8" y="8" width="528" height="379"/>
@@ -247,7 +247,7 @@
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDr-N6-D5i">
                                                                     <rect key="frame" x="0.0" y="75" width="528" height="70"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="oc1-E7-Mno"/>
+                                                                        <constraint firstAttribute="height" constant="70" id="oc1-E7-Mno"/>
                                                                     </constraints>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -260,21 +260,19 @@
                                                                 </imageView>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="MDr-N6-D5i" firstAttribute="top" secondItem="thr-EH-60k" secondAttribute="bottom" constant="5" id="iiy-Rb-EFN"/>
+                                                                <constraint firstItem="K9c-nK-0Ni" firstAttribute="top" secondItem="MDr-N6-D5i" secondAttribute="bottom" constant="5" id="BmM-dL-ZN5"/>
+                                                                <constraint firstItem="K9c-nK-0Ni" firstAttribute="leading" secondItem="HZd-pJ-8dY" secondAttribute="leading" id="DfP-EC-QNc"/>
+                                                                <constraint firstAttribute="bottom" secondItem="K9c-nK-0Ni" secondAttribute="bottom" id="JKK-5O-07R"/>
+                                                                <constraint firstAttribute="trailing" secondItem="K9c-nK-0Ni" secondAttribute="trailing" id="hEX-W5-EbJ"/>
                                                             </constraints>
-                                                            <variation key="default">
-                                                                <mask key="constraints">
-                                                                    <exclude reference="iiy-Rb-EFN"/>
-                                                                </mask>
-                                                            </variation>
                                                         </stackView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="HZd-pJ-8dY" firstAttribute="top" secondItem="nBG-aq-Ta5" secondAttribute="topMargin" id="3SG-pb-4KH"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="HZd-pJ-8dY" secondAttribute="bottom" id="aeo-8Z-E3h"/>
-                                                        <constraint firstItem="HZd-pJ-8dY" firstAttribute="leading" secondItem="nBG-aq-Ta5" secondAttribute="leadingMargin" id="pTx-Wb-noY"/>
-                                                        <constraint firstItem="HZd-pJ-8dY" firstAttribute="trailing" secondItem="nBG-aq-Ta5" secondAttribute="trailingMargin" id="plI-Zo-Yim"/>
+                                                        <constraint firstItem="HZd-pJ-8dY" firstAttribute="top" secondItem="nBG-aq-Ta5" secondAttribute="topMargin" id="0jP-dg-TfM"/>
+                                                        <constraint firstItem="HZd-pJ-8dY" firstAttribute="trailing" secondItem="nBG-aq-Ta5" secondAttribute="trailingMargin" id="BcR-uB-LYK"/>
+                                                        <constraint firstItem="HZd-pJ-8dY" firstAttribute="bottom" secondItem="nBG-aq-Ta5" secondAttribute="bottomMargin" id="pxk-3W-9Uf"/>
+                                                        <constraint firstItem="HZd-pJ-8dY" firstAttribute="leading" secondItem="nBG-aq-Ta5" secondAttribute="leadingMargin" id="tvr-un-7gJ"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

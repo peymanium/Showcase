@@ -42,7 +42,7 @@ class Post
         {
             self._postDescription = postDesc
         }
-        if let imageUrl = dictionary["imgaeUrl"] as? String
+        if let imageUrl = dictionary["imageUrl"] as? String
         {
             self._imageUrl = imageUrl
         }

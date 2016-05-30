@@ -28,7 +28,7 @@
 		5DF9452F1CF9DF3200CDE86F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF9452E1CF9DF3200CDE86F /* Security.framework */; };
 		5DF945311CF9DF3900CDE86F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DF945301CF9DF3900CDE86F /* SystemConfiguration.framework */; };
 		5DF945331CFB539B00CDE86F /* FeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945321CFB539B00CDE86F /* FeedsViewController.swift */; };
-		5DF945351CFB542400CDE86F /* PostCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945341CFB542400CDE86F /* PostCellTableViewCell.swift */; };
+		5DF945351CFB542400CDE86F /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945341CFB542400CDE86F /* PostCell.swift */; };
 		5DF945371CFB86AA00CDE86F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945361CFB86AA00CDE86F /* Post.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +56,7 @@
 		5DF9452E1CF9DF3200CDE86F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		5DF945301CF9DF3900CDE86F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5DF945321CFB539B00CDE86F /* FeedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedsViewController.swift; sourceTree = "<group>"; };
-		5DF945341CFB542400CDE86F /* PostCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCellTableViewCell.swift; sourceTree = "<group>"; };
+		5DF945341CFB542400CDE86F /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		5DF945361CFB86AA00CDE86F /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,7 +155,7 @@
 				5D8CE0F71CF7A87100A37868 /* CustomView.swift */,
 				5D8CE0FE1CF7B24300A37868 /* CustomLogo.swift */,
 				5D8CE1001CF7B36200A37868 /* CustomTextField.swift */,
-				5DF945341CFB542400CDE86F /* PostCellTableViewCell.swift */,
+				5DF945341CFB542400CDE86F /* PostCell.swift */,
 			);
 			name = "Custom Controls";
 			sourceTree = "<group>";
@@ -261,7 +261,7 @@
 				5D8CE0FF1CF7B24300A37868 /* CustomLogo.swift in Sources */,
 				5DF945211CF9D7BF00CDE86F /* DataServices.swift in Sources */,
 				5D8CE0FA1CF7A88100A37868 /* CustomButton.swift in Sources */,
-				5DF945351CFB542400CDE86F /* PostCellTableViewCell.swift in Sources */,
+				5DF945351CFB542400CDE86F /* PostCell.swift in Sources */,
 				5D8CE0F81CF7A87100A37868 /* CustomView.swift in Sources */,
 				5DF945331CFB539B00CDE86F /* FeedsViewController.swift in Sources */,
 				5D8CE0E41CF7A53900A37868 /* ViewController.swift in Sources */,

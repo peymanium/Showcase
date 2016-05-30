@@ -189,7 +189,7 @@
                                 <rect key="frame" x="20" y="0.0" width="560" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellID" rowHeight="411" id="DWC-vL-LFv" customClass="PostCellTableViewCell" customModule="Showcase" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellID" id="DWC-vL-LFv" customClass="PostCell" customModule="Showcase" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="560" height="411"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DWC-vL-LFv" id="6wB-mV-K5e">
@@ -202,10 +202,10 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HZd-pJ-8dY">
                                                             <rect key="frame" x="8" y="8" width="528" height="379"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="thr-EH-60k">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="thr-EH-60k">
                                                                     <rect key="frame" x="0.0" y="0.0" width="528" height="70"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="Tcj-Rl-3kH">
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="Tcj-Rl-3kH">
                                                                             <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="70" id="10b-VX-kBf"/>
@@ -244,10 +244,10 @@
                                                                         </stackView>
                                                                     </subviews>
                                                                 </stackView>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDr-N6-D5i">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDr-N6-D5i">
                                                                     <rect key="frame" x="0.0" y="75" width="528" height="70"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="oc1-E7-Mno"/>
+                                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="oc1-E7-Mno"/>
                                                                     </constraints>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -255,7 +255,7 @@
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                     <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                                                 </textView>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="screen" translatesAutoresizingMaskIntoConstraints="NO" id="K9c-nK-0Ni">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9c-nK-0Ni">
                                                                     <rect key="frame" x="0.0" y="150" width="528" height="229"/>
                                                                 </imageView>
                                                             </subviews>
@@ -289,6 +289,7 @@
                                         <connections>
                                             <outlet property="img_post" destination="K9c-nK-0Ni" id="wWS-fw-wfX"/>
                                             <outlet property="img_profile" destination="Tcj-Rl-3kH" id="fl1-2P-YCy"/>
+                                            <outlet property="lbl_likes" destination="7NT-NV-8F2" id="kqG-7H-Tm1"/>
                                             <outlet property="txt_postDesc" destination="MDr-N6-D5i" id="UzR-G7-JBV"/>
                                         </connections>
                                     </tableViewCell>
@@ -337,6 +338,5 @@
         <image name="facebook log" width="2000" height="2000"/>
         <image name="heart-empty" width="150" height="147"/>
         <image name="profile" width="100" height="104"/>
-        <image name="screen" width="300" height="534"/>
     </resources>
 </document>

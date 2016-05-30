@@ -8,11 +8,12 @@
 
 import UIKit
 
-class PostCellTableViewCell: UITableViewCell {
+class PostCell: UITableViewCell {
 
     @IBOutlet weak var img_profile : UIImageView!
     @IBOutlet weak var img_post : UIImageView!
     @IBOutlet weak var txt_postDesc : UITextView!
+    @IBOutlet weak var lbl_likes : UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,10 +32,23 @@ class PostCellTableViewCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func ConfigureCell(post : Post, cachedImage : UIImage?)
+    {
+        self.txt_postDesc.text = post.postDescription
+        self.lbl_likes.text = "\(post.likes)"
+        
+        if post.imageUrl == nil
+        {
+            self.img_post.hidden = true
+        }
+        else
+        {
+            if cachedImage != nil
+            {
+                self.img_post.image = cachedImage
+            }
+        }
+        
     }
-
+    
 }

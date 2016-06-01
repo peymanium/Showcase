@@ -74,8 +74,6 @@ class PostCell: UITableViewCell {
             }
         }
         
-        print ("\(self.img_post.frame.origin.y) \(self.img_post.frame.origin.y)")
-        
     }
     
 }

@@ -198,13 +198,16 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="hv6-G6-JTX">
+                                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="hv6-G6-JTX">
                                                 <rect key="frame" x="444" y="0.0" width="30" height="30"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="4Iz-n0-7RP"/>
                                                     <constraint firstAttribute="width" constant="30" id="dAM-Af-222"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="418-we-Vwy" appends="YES" id="luj-rY-LXa"/>
+                                                </connections>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fmy-Y3-8Z8">
                                                 <rect key="frame" x="484" y="0.0" width="60" height="30"/>
@@ -356,9 +359,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u33-KE-4UX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="aEu-aj-xb1">
+                <tapGestureRecognizer id="418-we-Vwy">
                     <connections>
-                        <action selector="IMG_Post_Tapped:" destination="pXZ-eh-ZN6" id="iQV-dI-q0x"/>
+                        <action selector="IMG_Post_Tapped:" destination="pXZ-eh-ZN6" id="2rz-Rt-CBe"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

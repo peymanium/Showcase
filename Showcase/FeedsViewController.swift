@@ -35,8 +35,12 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.imagePicker = UIImagePickerController()
         self.imagePicker.delegate = self
         
-        //To read firebase for new posts
-        DataServices.ds.REF_POSTS.observeEventType(.Value) { (snapshotData : FDataSnapshot!) in
+        self.ReadDataFromFirebase()
+
+    }
+    func ReadDataFromFirebase()
+    {//To read firebase for new posts
+        DataServices.ds.REF_POSTS.queryOrderedByChild("date").observeEventType(.Value) { (snapshotData : FDataSnapshot!) in
             
             self.posts = []
             if let snapshot = snapshotData.children.allObjects as? [FDataSnapshot]
@@ -56,8 +60,9 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             self.tableView.reloadData()
         }
-
+        
     }
+    
     
     //TableView Delegate functions
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -122,6 +127,7 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
+    //Post function
     @IBAction func BTN_Post_Tapped(sender: AnyObject)
     {
         
@@ -161,7 +167,7 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                         if let imageLink = links["image_link"] as? String
                                         {
                                             print (imageLink)
-                                            self.PostToFirebase(textPost, postImage: imageLink)
+                                            self.PostToFirebase(textPost, postImageUrl: imageLink)
                                         }
                                     }
                                 }
@@ -179,14 +185,31 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             else
             {
-                self.PostToFirebase(textPost, postImage: nil)
+                self.PostToFirebase(textPost, postImageUrl: nil)
             }
             
         }
         
     }
-    func PostToFirebase(postText : String, postImage : String?)
+    func PostToFirebase(postText : String, postImageUrl : String?)
     {
+        //creat the keys and values
+        var postData : Dictionary<String, AnyObject> =
+            [ "description" : postText,
+              "likes" : 0,
+              "date" : -1 * NSDate.timeIntervalSinceReferenceDate()
+        ]
+        
+        if postImageUrl != nil
+        {
+            postData["imageUrl"] = postImageUrl
+        }
+        
+        DataServices.ds.REF_POSTS.childByAutoId().setValue(postData)
+        
+        self.TXT_Post.text = ""
+        self.imageSelected = false
+        self.IMG_Post.image = UIImage(named: "camera")
         
     }
 

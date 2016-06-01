@@ -13,6 +13,11 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var TXT_Post: CustomTextField!
+    @IBOutlet weak var IMG_Post: UIImageView!
+    
+    
+    
     var posts = [Post]()
     static var imageCache = NSCache() //for caching images in the memory buffer, use static to be a singleton and call from any file in the project
     
@@ -96,5 +101,10 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
+    @IBAction func IMG_Post_Tapped(sender: UITapGestureRecognizer) {
+    }
+    
+    @IBAction func BTN_Post_Tapped(sender: AnyObject) {
+    }
 
 }

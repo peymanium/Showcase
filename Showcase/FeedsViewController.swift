@@ -60,23 +60,30 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        let post = self.posts[indexPath.row]
+        
         if let cell = tableView.dequeueReusableCellWithIdentifier("CellID") as? PostCell
         {
             cell.firebaseRequest?.cancel() //cancel the Alamofire request if the new row loaded
             
-            let post = self.posts[indexPath.row]
+            var cachedImage : UIImage?
+            if let imageUrl = post.imageUrl
+            {
+                cachedImage = FeedsViewController.imageCache.objectForKey(imageUrl) as? UIImage
+            }
             
-            cell.ConfigureCell(post)
+            cell.ConfigureCell(post, cachedImage: cachedImage)
             return cell
         }
         else
         {
-            return UITableViewCell()
+            return PostCell()
         }
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         let post = posts[indexPath.row]
+        
         if post.imageUrl == nil
         {
             return 200

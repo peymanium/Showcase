@@ -16,7 +16,6 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var txt_postDesc : UITextView!
     @IBOutlet weak var lbl_likes : UILabel!
     
-    var _post : Post!
     var firebaseRequest : Request?
     
     override func awakeFromNib()
@@ -39,41 +38,43 @@ class PostCell: UITableViewCell {
     }
 
     
-    func ConfigureCell(post : Post)
+    func ConfigureCell(post : Post, cachedImage : UIImage?)
     {
-        _post = post
+        self.txt_postDesc.text = post.postDescription
+        self.lbl_likes.text = "\(post.likes)"
         
-        self.txt_postDesc.text = _post.postDescription
-        self.lbl_likes.text = "\(_post.likes)"
-        
-        if _post.imageUrl == nil //There is no image set by user in firebase
+        if post.imageUrl == nil //There is no image set by user in firebase
         {
             self.img_post.hidden = true
         }
         else
         {
             //Check if image with the key=ImageURL valid in cache, then send it to confirgure cell
-            if let cachedImage = FeedsViewController.imageCache.objectForKey(post.imageUrl!) as? UIImage
+            if cachedImage != nil
             {
                 self.img_post.image = cachedImage
-                print ("image \(post.imageUrl) was retreived from cache")
             }
             else //load image from interner
             {
-                let url = NSURL(string: _post.imageUrl!)
+                let url = NSURL(string: post.imageUrl!)
                 
                 firebaseRequest = Alamofire.request(.GET, url!).validate(contentType: ["image/*"]).response(completionHandler: { (request : NSURLRequest?, response : NSHTTPURLResponse?, data : NSData?, error : NSError?) in
                     
                     if error == nil
                     {
-                        self.img_post.image = UIImage(data: data!)
+                        let imageFromData = UIImage(data: data!)
+                        self.img_post.image = imageFromData
+                        
                         FeedsViewController.imageCache.setObject(self.img_post.image!, forKey: post.imageUrl!)
+                        
                     }
                     
                 })
                 
             }
         }
+        
+        print ("\(self.img_post.frame.origin.y) \(self.img_post.frame.origin.y)")
         
     }
     

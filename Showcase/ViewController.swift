@@ -46,10 +46,12 @@ class ViewController: UIViewController {
             }
             else
             {
-                let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
+                let facebookAccessToken = FBSDKAccessToken.currentAccessToken().tokenString
+                let credential = FIRFacebookAuthProvider.credentialWithAccessToken(facebookAccessToken)
+                
                 print ("Successfully logged in with Facebook")
                 
-                DataServices.ds.REF_BASE.authWithOAuthProvider("facebook", token: accessToken, withCompletionBlock: { (error : NSError!, authData : FAuthData!) in
+                FIRAuth.auth()?.signInWithCredential(credential, completion: { (user : FIRUser?, error : NSError?) in
                     
                     if error != nil
                     {
@@ -57,13 +59,16 @@ class ViewController: UIViewController {
                     }
                     else
                     {
-                        print ("Logged in \(authData)")
+                        print ("Logged in \(user)")
                         
                         //Create user in Firebase
-                        let user = ["provider" : authData.provider!]
-                        DataServices.ds.CreateFirebaseUser(authData.uid, user: user)
+                        print (user?.providerID)
+                        print (credential.provider)
                         
-                        NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: KEY_UID)
+                        let userData = ["provider" : credential.provider]
+                        DataServices.ds.CreateFirebaseUser(user!.uid, user: userData)
+                        
+                        NSUserDefaults.standardUserDefaults().setValue(user!.uid, forKey: KEY_UID)
                         
                         //After sucessflly logged in
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
@@ -81,15 +86,15 @@ class ViewController: UIViewController {
         if let email = self.TXT_Email.text where email != "", let password = self.TXT_Password.text where password != ""
         {
             
-            DataServices.ds.REF_BASE.authUser(email, password: password, withCompletionBlock: { (errorAuthUser: NSError!, authData : FAuthData!) in
+            FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user : FIRUser?, error : NSError?) in
                 
-                if errorAuthUser != nil //there is an error
+                if let errorAuthUser = error //there is an error
                 {
                     print (errorAuthUser)
                     if errorAuthUser.code == STATUS_USER_NONEXIST //if user does not exist
                     {
                         //Create user
-                        DataServices.ds.REF_BASE.createUser(email, password: password, withValueCompletionBlock: { (errorCreateUser : NSError!, result : [NSObject : AnyObject]!) in
+                        FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user : FIRUser?, errorCreateUser : NSError?) in
                             
                             if errorCreateUser != nil
                             {
@@ -97,18 +102,11 @@ class ViewController: UIViewController {
                             }
                             else
                             {
-                                NSUserDefaults.standardUserDefaults().setValue(result[KEY_UID], forKey: KEY_UID)
+                                NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
                                 
-                                DataServices.ds.REF_BASE.authUser(email, password: password, withCompletionBlock: { (errorAuthUser_ : NSError!, authDate_ : FAuthData!) in
-                                    
-                                    if errorAuthUser_ == nil
-                                    {
-                                        //Create user in Firebase
-                                        let user = ["provider" : authDate_.provider!]
-                                        DataServices.ds.CreateFirebaseUser(authDate_.uid, user: user)
-                                    }
-                                    
-                                })
+                                //Create user in Firebase
+                                let userData = ["provider" : "email"]
+                                DataServices.ds.CreateFirebaseUser(user!.uid, user: userData)
                                 
                                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                                 

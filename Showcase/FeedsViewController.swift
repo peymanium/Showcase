@@ -43,10 +43,10 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //To read firebase for new posts
         let postRef = DataServices.ds.REF_POSTS.queryOrderedByChild("date")
         
-        postRef.observeEventType(.Value) { (snapshotData : FDataSnapshot!) in
+        postRef.observeEventType(.Value) { (snapshotData : FIRDataSnapshot!) in
             
             self.posts = []
-            if let snapshot = snapshotData.children.allObjects as? [FDataSnapshot]
+            if let snapshot = snapshotData.children.allObjects as? [FIRDataSnapshot]
             {
                 for snap in snapshot
                 {

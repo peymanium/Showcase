@@ -9,33 +9,33 @@
 import Foundation
 import Firebase
 
-let URL_BASE = "https://peymanium-showcase.firebaseio.com"
+let URL_BASE = FIRDatabase.database().reference()
 
 class DataServices
 {
     static let ds = DataServices()
     
-    private var _REF_BASE = Firebase(url: "\(URL_BASE)")
-    private var _REF_POSTS = Firebase(url: "\(URL_BASE)/Posts")
-    private var _REF_USERS = Firebase(url: "\(URL_BASE)/Users")
-    private var _REF_CURRENT_USER = Firebase(url: "\(URL_BASE)").childByAppendingPath("Users")
+    private var _REF_BASE = URL_BASE
+    private var _REF_POSTS = URL_BASE.child("Posts")
+    private var _REF_USERS = URL_BASE.child("Users")
+    private var _REF_CURRENT_USER = URL_BASE.child("Users")
     
-    var REF_BASE : Firebase
+    var REF_BASE : FIRDatabaseReference
         {
         return self._REF_BASE
     }
-    var REF_POSTS : Firebase
+    var REF_POSTS : FIRDatabaseReference
         {
         return self._REF_POSTS
     }
-    var REF_USERS : Firebase
+    var REF_USERS : FIRDatabaseReference
         {
         return self._REF_USERS
     }
-    var REF_CURRENT_USER : Firebase
+    var REF_CURRENT_USER : FIRDatabaseReference
     {
         let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
-        let currentUser = _REF_CURRENT_USER.childByAppendingPath(uid)
+        let currentUser = _REF_CURRENT_USER.child(uid)
         
         return currentUser
     }
@@ -43,6 +43,7 @@ class DataServices
     
     func CreateFirebaseUser (uid : String, user : Dictionary<String,String>)
     {
-        REF_USERS.childByAppendingPath(uid).setValue(user)
+        //REF_USERS.child(uid).setValue(user)  //OR
+        REF_USERS.child(uid).updateChildValues(user)
     }
 }

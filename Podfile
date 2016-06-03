@@ -5,5 +5,8 @@ platform :ios, '9.0'
 target 'Showcase' do
 
 pod 'Alamofire', '~> 3.4'
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
 
 end

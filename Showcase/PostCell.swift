@@ -20,7 +20,7 @@ class PostCell: UITableViewCell {
 
     var post : Post!
     var firebaseRequest : Request?
-    var likeRef : Firebase!
+    var likeRef : FIRDatabaseReference!
     
     override func awakeFromNib()
     {
@@ -88,10 +88,11 @@ class PostCell: UITableViewCell {
         
         
         //Now check the heart image
-        likeRef = DataServices.ds.REF_CURRENT_USER.childByAppendingPath("likes").childByAppendingPath(post.key)
-        likeRef.observeSingleEventOfType(.Value) { (snapshot : FDataSnapshot!) in
+        likeRef = DataServices.ds.REF_CURRENT_USER.child("likes").child(post.key)
+        likeRef.observeSingleEventOfType(.Value) { (snapshot : FIRDataSnapshot!) in
             
-            if let value = snapshot.value as? NSNull
+            //if let value = snapshot.value as? NSNull
+            if let value = snapshot.value where value is NSNull
             {
                 self.img_heart.image = UIImage(named: "heart-empty")
             }
@@ -105,7 +106,7 @@ class PostCell: UITableViewCell {
     
     @IBAction func IMG_Heart_Tapped (sender : UIGestureRecognizer)
     {
-        likeRef.observeSingleEventOfType(.Value) { (snapshot : FDataSnapshot!) in
+        likeRef.observeSingleEventOfType(.Value) { (snapshot : FIRDataSnapshot!) in
             
             if let value = snapshot.value where value is NSNull
             {

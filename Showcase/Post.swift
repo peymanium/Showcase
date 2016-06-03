@@ -16,7 +16,7 @@ class Post
     private var _likes : Int!
     private var _key : String!
     private var _username : String!
-    private var _postRef : Firebase!
+    private var _postRef : FIRDatabaseReference!
     
     var postDescription : String!
         {
@@ -58,7 +58,7 @@ class Post
         }
         
         //Add a reference to post in firebase
-        _postRef = DataServices.ds.REF_POSTS.childByAppendingPath(self._key)
+        _postRef = DataServices.ds.REF_POSTS.child(self._key)
     }
     
     
@@ -74,7 +74,7 @@ class Post
         }
         
         //update likes field for Post
-        _postRef.childByAppendingPath("likes").setValue(self._likes)
+        _postRef.child("likes").setValue(self._likes)
     }
     
 }

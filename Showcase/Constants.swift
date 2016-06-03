@@ -18,5 +18,5 @@ let KEY_UID = "uid"
 let SEGUE_LOGGED_IN = "Segue_LoggedIn"
 
 //Status Code
-let STATUS_USER_NONEXIST = -8
+let STATUS_USER_NONEXIST = 17011
 let STATUS_PASSWORD_INCORRECT = -6

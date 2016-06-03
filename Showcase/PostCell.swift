@@ -111,7 +111,7 @@ class PostCell: UITableViewCell {
             {
                 self.img_heart.image = UIImage(named: "heart-full")
                 self.post.UpdateLikes(true)
-                self.likeRef.setValue(true)
+                self.likeRef.setValue(NSDate.timeIntervalSinceReferenceDate())
             }
             else
             {

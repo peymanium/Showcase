@@ -61,10 +61,6 @@ class ViewController: UIViewController {
                     {
                         print ("Logged in \(user)")
                         
-                        //Create user in Firebase
-                        print (user?.providerID)
-                        print (credential.provider)
-                        
                         let userData = ["provider" : credential.provider]
                         DataServices.ds.CreateFirebaseUser(user!.uid, user: userData)
                         

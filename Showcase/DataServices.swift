@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 
 let URL_BASE = FIRDatabase.database().reference()
+let STORAGE_BASE = FIRStorage.storage().reference()//.referenceForURL("gs://peymanium-showcase.appspot.com")
 
 class DataServices
 {
@@ -19,6 +20,7 @@ class DataServices
     private var _REF_POSTS = URL_BASE.child("Posts")
     private var _REF_USERS = URL_BASE.child("Users")
     private var _REF_CURRENT_USER = URL_BASE.child("Users")
+    private var _REF_STORAGE = STORAGE_BASE
     
     var REF_BASE : FIRDatabaseReference
         {
@@ -38,6 +40,10 @@ class DataServices
         let currentUser = _REF_CURRENT_USER.child(uid)
         
         return currentUser
+    }
+    var REF_STORAGE : FIRStorageReference
+    {
+        return self._REF_STORAGE
     }
     
     

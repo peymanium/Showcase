@@ -8,5 +8,6 @@ pod 'Alamofire', '~> 3.4'
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
+pod 'Firebase/Storage'
 
 end

@@ -130,8 +130,8 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
-    //Post function
-    @IBAction func BTN_Post_Tapped(sender: AnyObject)
+    //Post function using Alamofire and ImageShack
+    /*@IBAction func BTN_Post_Tapped(sender: AnyObject)
     {
         
         if let textPost = self.TXT_Post.text where self.TXT_Post.text != ""
@@ -185,6 +185,42 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 
                 //
                 
+            }
+            else
+            {
+                self.PostToFirebase(textPost, postImageUrl: nil)
+            }
+            
+        }
+        
+    }*/
+    //Image post function using Firebase
+    @IBAction func BTN_Post_Tapped(sender: AnyObject)
+    {
+        
+        if let textPost = self.TXT_Post.text where self.TXT_Post.text != ""
+        {
+            
+            if let img = self.IMG_Post.image where imageSelected
+            {
+                if let imageData = UIImageJPEGRepresentation(img, 0.2)
+                {
+                    
+                    DataServices.ds.REF_STORAGE.child("images").putData(imageData, metadata: nil, completion: { (metadata : FIRStorageMetadata?, error : NSError?) in
+                        
+                        if error == nil
+                        {
+                            let imageLink = metadata!.downloadURL()
+                            print (imageLink)
+                            self.PostToFirebase(textPost, postImageUrl: imageLink?.URLString)
+                        }
+                        else
+                        {
+                            print (error.debugDescription)
+                        }
+                        
+                    })
+                }
             }
             else
             {

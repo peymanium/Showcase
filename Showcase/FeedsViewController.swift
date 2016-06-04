@@ -206,7 +206,7 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 if let imageData = UIImageJPEGRepresentation(img, 0.2)
                 {
                     
-                    DataServices.ds.REF_STORAGE.child("images").putData(imageData, metadata: nil, completion: { (metadata : FIRStorageMetadata?, error : NSError?) in
+                    DataServices.ds.REF_STORAGE.child("images").child("image_\(NSDate.timeIntervalSinceReferenceDate()).jpg").putData(imageData, metadata: nil, completion: { (metadata : FIRStorageMetadata?, error : NSError?) in
                         
                         if error == nil
                         {

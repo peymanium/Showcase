@@ -36,8 +36,8 @@ class DataServices
     }
     var REF_CURRENT_USER : FIRDatabaseReference
     {
-        let uid = NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) as! String
-        let currentUser = _REF_CURRENT_USER.child(uid)
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        let currentUser = _REF_CURRENT_USER.child(uid!)
         
         return currentUser
     }

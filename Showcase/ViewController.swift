@@ -26,8 +26,9 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if NSUserDefaults.standardUserDefaults().valueForKey(KEY_UID) != nil
+        if let user = FIRAuth.auth()?.currentUser
         {
+            print ("\(user.uid) logged in")
             self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
         }
     }
@@ -49,8 +50,6 @@ class ViewController: UIViewController {
                 let facebookAccessToken = FBSDKAccessToken.currentAccessToken().tokenString
                 let credential = FIRFacebookAuthProvider.credentialWithAccessToken(facebookAccessToken)
                 
-                print ("Successfully logged in with Facebook")
-                
                 FIRAuth.auth()?.signInWithCredential(credential, completion: { (user : FIRUser?, error : NSError?) in
                     
                     if error != nil
@@ -59,12 +58,9 @@ class ViewController: UIViewController {
                     }
                     else
                     {
-                        print ("Logged in \(user)")
                         
                         let userData = ["provider" : credential.provider]
                         DataServices.ds.CreateFirebaseUser(user!.uid, user: userData)
-                        
-                        NSUserDefaults.standardUserDefaults().setValue(user!.uid, forKey: KEY_UID)
                         
                         //After sucessflly logged in
                         self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
@@ -98,8 +94,6 @@ class ViewController: UIViewController {
                             }
                             else
                             {
-                                NSUserDefaults.standardUserDefaults().setValue(user?.uid, forKey: KEY_UID)
-                                
                                 //Create user in Firebase
                                 let userData = ["provider" : "email"]
                                 DataServices.ds.CreateFirebaseUser(user!.uid, user: userData)
@@ -118,7 +112,6 @@ class ViewController: UIViewController {
                 }
                 else //if there is no error and user successfully authorized
                 {
-                    print ("User authorized")
                     self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
                 }
                 
@@ -131,6 +124,7 @@ class ViewController: UIViewController {
         }
     }
     
+
     
     func ShowAlertView (title : String, message : String)
     {

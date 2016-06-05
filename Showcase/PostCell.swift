@@ -17,6 +17,7 @@ class PostCell: UITableViewCell {
     @IBOutlet weak var txt_postDesc : UITextView!
     @IBOutlet weak var lbl_likes : UILabel!
     @IBOutlet weak var img_heart : UIImageView!
+    @IBOutlet weak var lbl_postDate : UILabel!
 
     var post : Post!
     var firebaseRequest : Request?
@@ -51,8 +52,9 @@ class PostCell: UITableViewCell {
     func ConfigureCell(post : Post, cachedImage : UIImage?)
     {
         self.post = post
-        
+
         self.txt_postDesc.text = self.post.postDescription
+        self.lbl_postDate.text = self.post.postDate
         self.lbl_likes.text = "\(self.post.likes)"
         
         if self.post.imageUrl == nil //There is no image set by user in firebase
@@ -68,20 +70,8 @@ class PostCell: UITableViewCell {
             }
             else //load image from interner
             {
-                let url = NSURL(string: self.post.imageUrl!)
-                
-                firebaseRequest = Alamofire.request(.GET, url!).validate(contentType: ["image/*"]).response(completionHandler: { (request : NSURLRequest?, response : NSHTTPURLResponse?, data : NSData?, error : NSError?) in
-                    
-                    if error == nil
-                    {
-                        let imageFromData = UIImage(data: data!)
-                        self.img_post.image = imageFromData
-                        
-                        FeedsViewController.imageCache.setObject(self.img_post.image!, forKey: self.post.imageUrl!)
-                        
-                    }
-                    
-                })
+                //self.LoadImageFromFirebase()
+                self.LoadImageFromAlamofire()
                 
             }
         }
@@ -99,6 +89,50 @@ class PostCell: UITableViewCell {
             else
             {
                 self.img_heart.image = UIImage(named: "heart-full")
+            }
+        }
+    }
+    func LoadImageFromAlamofire()
+    {
+        let url = NSURL(string: self.post.imageUrl!)
+        
+        firebaseRequest = Alamofire.request(.GET, url!).validate(contentType: ["image/*"]).response(completionHandler: { (request : NSURLRequest?, response : NSHTTPURLResponse?, data : NSData?, error : NSError?) in
+            
+            if error == nil
+            {
+                let imageFromData = UIImage(data: data!)
+                self.img_post.image = imageFromData
+                
+                FeedsViewController.imageCache.setObject(self.img_post.image!, forKey: self.post.imageUrl!)
+                
+            }
+            
+        })
+    }
+    func LoadImageFromFirebase()
+    {
+        let imageName = self.post.imageName!
+        
+        DataServices.ds.REF_STORAGE.child("images").child(imageName).dataWithMaxSize(1*1024*1024, completion: { (data : NSData?, error : NSError?) in
+            
+            if error == nil
+            {
+                let imageFromData = UIImage(data: data!)
+                self.img_post.image = imageFromData
+                
+                FeedsViewController.imageCache.setObject(self.img_post.image!, forKey: self.post.imageUrl!)
+            }
+            else
+            {
+                print (error.debugDescription)
+            }
+            
+        }).observeStatus(.Progress) { (snapshot : FIRStorageTaskSnapshot) in
+            
+            if let progress = snapshot.progress where progress.totalUnitCount > 0
+            {
+                let percentComplete = (Int)(100 * (Double)(progress.completedUnitCount) / (Double)(progress.totalUnitCount))
+                print ("\(percentComplete)% Completed")
             }
         }
     }

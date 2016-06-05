@@ -31,6 +31,7 @@ class ViewController: UIViewController {
             print ("\(user.uid) logged in")
             self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)
         }
+        
     }
     
     

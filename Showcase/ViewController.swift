@@ -97,6 +97,7 @@ class ViewController: UIViewController {
                             {
                                 //Create user in Firebase
                                 let userData = ["provider" : "email"]
+                                
                                 DataServices.ds.CreateFirebaseUser(user!.uid, user: userData)
                                 
                                 self.performSegueWithIdentifier(SEGUE_LOGGED_IN, sender: nil)

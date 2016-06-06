@@ -143,16 +143,11 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 {
                     let imageName = "image_\(NSDate.timeIntervalSinceReferenceDate()).jpg"
                     
-                    DataServices.ds.REF_STORAGE.child("images").child(imageName).putData(imageData, metadata: nil, completion: { (metadata : FIRStorageMetadata?, error : NSError?) in
+                    DataServices.ds.AddImageToFirebase("images", imageName: imageName, imageData: imageData, completion: { (imageURL) in
                         
-                        if error == nil
+                        if let imageUrl = imageURL
                         {
-                            let imageLink = metadata!.downloadURL()
-                            self.PostToFirebase(textPost, postImageUrl: imageLink?.URLString, postImageName : imageName)
-                        }
-                        else
-                        {
-                            print (error.debugDescription)
+                            self.PostFeed(textPost, postImageUrl: imageUrl, postImageName : imageName)
                         }
                         
                     })
@@ -160,20 +155,21 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
             else
             {
-                self.PostToFirebase(textPost, postImageUrl: nil, postImageName: nil)
+                self.PostFeed(textPost, postImageUrl: nil, postImageName: nil)
             }
             
         }
         
     }
-    func PostToFirebase(postText : String, postImageUrl : String?, postImageName : String?)
+    func PostFeed(postText : String, postImageUrl : String?, postImageName : String?)
     {
         //creat the keys and values
         var postData : Dictionary<String, AnyObject> =
             [ "description" : postText,
               "likes" : 0,
               "order" : -1 * NSDate.timeIntervalSinceReferenceDate(),
-              "date" : "\(NSDate())"
+              "date" : "\(NSDate())",
+              "userID" : (FIRAuth.auth()?.currentUser!)!
         ]
         
         if postImageUrl != nil
@@ -182,12 +178,51 @@ class FeedsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             postData["imageName"] = postImageName
         }
         
-        DataServices.ds.REF_POSTS.childByAutoId().setValue(postData)
         
-        self.TXT_Post.text = ""
-        self.imageSelected = false
-        self.IMG_Post.image = UIImage(named: "camera")
+        DataServices.ds.PostToFirebase(postData) { 
+            
+            self.TXT_Post.text = ""
+            self.imageSelected = false
+            self.IMG_Post.image = UIImage(named: "camera")
+            
+        }
         
     }
+    
+    
+    @IBAction func BTN_Signout_Tapped(sender: AnyObject)
+    {
+        
+        let alertViewAction_OK = UIAlertAction(title: "Yes", style: .Default) { (action : UIAlertAction) in
+            
+            do
+            {
+                try FIRAuth.auth()?.signOut()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            catch let error as NSError
+            {
+                print (error.debugDescription)
+            }
+            
+        }
+        let alertViewAction_Cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            
+            let alertView = UIAlertController(title: "Logout?", message: "Are you sure you want to logout?", preferredStyle: .Alert)
+            alertView.addAction(alertViewAction_OK)
+            alertView.addAction(alertViewAction_Cancel)
+
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func BTN_Setting_Tapped(sender: AnyObject)
+    {
+        self.performSegueWithIdentifier(SEGUE_SETTING, sender: nil)
+        
+    }
+    
+    
+    
 
 }

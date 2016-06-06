@@ -21,6 +21,8 @@
 		5D8CE1061CF97D0600A37868 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8CE1031CF97D0600A37868 /* Bolts.framework */; };
 		5D8CE1071CF97D0600A37868 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8CE1041CF97D0600A37868 /* FBSDKCoreKit.framework */; };
 		5D8CE1081CF97D0600A37868 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D8CE1051CF97D0600A37868 /* FBSDKLoginKit.framework */; };
+		5DDC637A1D045F7E00F753BF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDC63791D045F7E00F753BF /* SettingsViewController.swift */; };
+		5DDC637C1D0465ED00F753BF /* CustomProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DDC637B1D0465ED00F753BF /* CustomProfileImage.swift */; };
 		5DF945211CF9D7BF00CDE86F /* DataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945201CF9D7BF00CDE86F /* DataServices.swift */; };
 		5DF945331CFB539B00CDE86F /* FeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945321CFB539B00CDE86F /* FeedsViewController.swift */; };
 		5DF945351CFB542400CDE86F /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DF945341CFB542400CDE86F /* PostCell.swift */; };
@@ -45,6 +47,8 @@
 		5D8CE1031CF97D0600A37868 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		5D8CE1041CF97D0600A37868 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		5D8CE1051CF97D0600A37868 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		5DDC63791D045F7E00F753BF /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		5DDC637B1D0465ED00F753BF /* CustomProfileImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomProfileImage.swift; sourceTree = "<group>"; };
 		5DF945201CF9D7BF00CDE86F /* DataServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataServices.swift; sourceTree = "<group>"; };
 		5DF945261CF9DED400CDE86F /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		5DF945281CF9DF1400CDE86F /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
@@ -131,7 +135,9 @@
 			children = (
 				5D8CE0FB1CF7A88700A37868 /* Custom Controls */,
 				5D8CE0E31CF7A53900A37868 /* ViewController.swift */,
+				5DF945341CFB542400CDE86F /* PostCell.swift */,
 				5DF945321CFB539B00CDE86F /* FeedsViewController.swift */,
+				5DDC63791D045F7E00F753BF /* SettingsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -152,7 +158,7 @@
 				5D8CE0F71CF7A87100A37868 /* CustomView.swift */,
 				5D8CE0FE1CF7B24300A37868 /* CustomLogo.swift */,
 				5D8CE1001CF7B36200A37868 /* CustomTextField.swift */,
-				5DF945341CFB542400CDE86F /* PostCell.swift */,
+				5DDC637B1D0465ED00F753BF /* CustomProfileImage.swift */,
 			);
 			name = "Custom Controls";
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 			files = (
 				5D8CE1011CF7B36200A37868 /* CustomTextField.swift in Sources */,
 				5DF945371CFB86AA00CDE86F /* Post.swift in Sources */,
+				5DDC637C1D0465ED00F753BF /* CustomProfileImage.swift in Sources */,
 				5D8CE0FD1CF7A90F00A37868 /* Constants.swift in Sources */,
 				5D8CE0FF1CF7B24300A37868 /* CustomLogo.swift in Sources */,
 				5DF945211CF9D7BF00CDE86F /* DataServices.swift in Sources */,
@@ -325,6 +332,7 @@
 				5DF945331CFB539B00CDE86F /* FeedsViewController.swift in Sources */,
 				5D8CE0E41CF7A53900A37868 /* ViewController.swift in Sources */,
 				5D8CE0E21CF7A53900A37868 /* AppDelegate.swift in Sources */,
+				5DDC637A1D045F7E00F753BF /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

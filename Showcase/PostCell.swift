@@ -12,6 +12,7 @@ import Firebase
 
 class PostCell: UITableViewCell {
 
+    @IBOutlet weak var lbl_username : UILabel!
     @IBOutlet weak var img_profile : UIImageView!
     @IBOutlet weak var img_post : UIImageView!
     @IBOutlet weak var txt_postDesc : UITextView!
@@ -38,9 +39,6 @@ class PostCell: UITableViewCell {
     
     override func drawRect(rect: CGRect)
     {
-        self.img_profile.layer.cornerRadius = self.img_profile.frame.width / 2
-        self.img_profile.clipsToBounds = true
-        
         self.img_post.clipsToBounds = true
         
         //just to start the UITextView from the top of the text
@@ -57,6 +55,36 @@ class PostCell: UITableViewCell {
         self.lbl_postDate.text = self.post.postDate
         self.lbl_likes.text = "\(self.post.likes)"
         
+        
+        
+        //GET Username and his profile image
+        let userRef = DataServices.ds.REF_USERS.child(self.post.userID)
+        userRef.observeSingleEventOfType(.Value) { (snapshot : FIRDataSnapshot) in
+            
+            if let details = snapshot.value as? Dictionary<String, AnyObject>
+            {
+                if let profileImageName = details["profileImageName"] as? String
+                {
+                    DataServices.ds.LoadImageFromFirebase("profile", imageName : profileImageName, completion: { (resultImage) in
+                        
+                        if let image = resultImage
+                        {
+                            self.img_profile.image = image
+                        }
+                    })
+                }
+                
+                if let username = details["username"] as? String
+                {
+                    self.lbl_username.text = username
+                }
+                
+            }
+            
+        }
+        
+        
+        
         if self.post.imageUrl == nil //There is no image set by user in firebase
         {
             self.img_post.hidden = true
@@ -70,15 +98,32 @@ class PostCell: UITableViewCell {
             }
             else //load image from interner
             {
-                //self.LoadImageFromFirebase()
-                self.LoadImageFromAlamofire()
+                DataServices.ds.LoadImageFromFirebase("images", imageName : self.post.imageName, completion: { (resultImage) in
+                    
+                    if let image = resultImage
+                    {
+                        self.img_post.image = image
+                        FeedsViewController.imageCache.setObject(image, forKey: self.post.imageUrl!)
+                    }
+                    
+                })
+                
+                /*DataServices.ds.LoadImageFromAlamofire(self.post.imageUrl, completion: { (imageResult) in
+                    
+                    if let image = resultImage
+                    {
+                        self.img_post.image = image
+                        FeedsViewController.imageCache.setObject(image, forKey: self.post.imageUrl!)
+                    }
+                    
+                })*/
                 
             }
         }
         
         
         //Now check the heart image
-        likeRef = DataServices.ds.REF_CURRENT_USER.child("likes").child(post.key)
+        likeRef = DataServices.ds.REF_CURRENT_USER.child("likes").child(post.postID)
         likeRef.observeSingleEventOfType(.Value) { (snapshot : FIRDataSnapshot!) in
             
             //if let value = snapshot.value as? NSNull
@@ -91,51 +136,9 @@ class PostCell: UITableViewCell {
                 self.img_heart.image = UIImage(named: "heart-full")
             }
         }
-    }
-    func LoadImageFromAlamofire()
-    {
-        let url = NSURL(string: self.post.imageUrl!)
         
-        firebaseRequest = Alamofire.request(.GET, url!).validate(contentType: ["image/*"]).response(completionHandler: { (request : NSURLRequest?, response : NSHTTPURLResponse?, data : NSData?, error : NSError?) in
-            
-            if error == nil
-            {
-                let imageFromData = UIImage(data: data!)
-                self.img_post.image = imageFromData
-                
-                FeedsViewController.imageCache.setObject(self.img_post.image!, forKey: self.post.imageUrl!)
-                
-            }
-            
-        })
     }
-    func LoadImageFromFirebase()
-    {
-        let imageName = self.post.imageName!
-        
-        DataServices.ds.REF_STORAGE.child("images").child(imageName).dataWithMaxSize(1*1024*1024, completion: { (data : NSData?, error : NSError?) in
-            
-            if error == nil
-            {
-                let imageFromData = UIImage(data: data!)
-                self.img_post.image = imageFromData
-                
-                FeedsViewController.imageCache.setObject(self.img_post.image!, forKey: self.post.imageUrl!)
-            }
-            else
-            {
-                print (error.debugDescription)
-            }
-            
-        }).observeStatus(.Progress) { (snapshot : FIRStorageTaskSnapshot) in
-            
-            if let progress = snapshot.progress where progress.totalUnitCount > 0
-            {
-                let percentComplete = (Int)(100 * (Double)(progress.completedUnitCount) / (Double)(progress.totalUnitCount))
-                print ("\(percentComplete)% Completed")
-            }
-        }
-    }
+
     
     
     @IBAction func IMG_Heart_Tapped (sender : UIGestureRecognizer)

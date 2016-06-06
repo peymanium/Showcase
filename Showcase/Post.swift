@@ -11,18 +11,19 @@ import Firebase
 
 class Post
 {
-    private var _postDescription : String!
+    private var _description : String!
     private var _imageUrl : String?
     private var _imageName : String?
     private var _likes : Int!
-    private var _key : String!
-    private var _username : String!
+    private var _postID : String!
+    private var _userID : String!
     private var _postDate : String!
+    
     private var _postRef : FIRDatabaseReference!
     
     var postDescription : String!
         {
-        return self._postDescription
+        return self._description
     }
     var imageUrl : String?
     {
@@ -32,13 +33,13 @@ class Post
     {
         return self._likes
     }
-    var username : String!
+    var userID : String!
     {
-        return self._username
+        return self._userID
     }
-    var key : String!
+    var postID : String!
     {
-        return self._key
+        return self._postID
     }
     var postDate : String!
     {
@@ -53,11 +54,11 @@ class Post
     
     init(postKey : String!, dictionary : Dictionary<String, AnyObject>)
     {
-        self._key = postKey
+        self._postID = postKey
         
         if let postDesc = dictionary["description"] as? String
         {
-            self._postDescription = postDesc
+            self._description = postDesc
         }
         if let imageUrl = dictionary["imageUrl"] as? String
         {
@@ -75,10 +76,14 @@ class Post
         {
             self._imageName = imageName
         }
+        if let userID = dictionary["userID"] as? String
+        {
+            self._userID = userID
+        }
         
         
         //Add a reference to post in firebase
-        _postRef = DataServices.ds.REF_POSTS.child(self._key)
+        _postRef = DataServices.ds.REF_POSTS.child(self._postID)
     }
     
     

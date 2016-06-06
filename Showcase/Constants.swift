@@ -16,6 +16,7 @@ let KEY_UID = "uid"
 
 //Segues
 let SEGUE_LOGGED_IN = "Segue_LoggedIn"
+let SEGUE_SETTING = "Segue_Setting"
 
 //Status Code
 let STATUS_USER_NONEXIST = 17011
